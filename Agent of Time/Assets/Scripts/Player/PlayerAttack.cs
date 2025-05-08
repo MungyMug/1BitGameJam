@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header ("Sweeping Attack")]
+    [Header("Sweeping Attack")]
+    [SerializeField] PlayerStats playerStats;
     [SerializeField] float attackRadius = 2f;
     [SerializeField] float attackAngle = 60f;
     [SerializeField] LayerMask enemyLayer;
@@ -24,25 +25,14 @@ public class PlayerAttack : MonoBehaviour
             if (angle <= attackAngle / 2f)
             {
                 Debug.Log("Enemy hit: " + hit.name);
-                // Damage logic here
+
+                EnemyStats enemyStats = hit.GetComponentInParent<EnemyStats>();
+
+                if (enemyStats != null)
+                {
+                    enemyStats.TakeDamage(playerStats.AttackPower);
+                }
             }
         }
     }
-
-    void OnDrawGizmosSelected()
-    {
-        Vector3 mouseWorldPos = Application.isPlaying ? Camera.main.ScreenToWorldPoint(Input.mousePosition) : transform.right;
-        Vector2 direction = (mouseWorldPos - transform.position).normalized;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRadius);
-
-        Vector2 leftLimit = Quaternion.Euler(0, 0, -attackAngle / 2f) * direction;
-        Vector2 rightLimit = Quaternion.Euler(0, 0, attackAngle / 2f) * direction;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, leftLimit * attackRadius);
-        Gizmos.DrawRay(transform.position, rightLimit * attackRadius);
-    }
-
 }

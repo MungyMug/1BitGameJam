@@ -8,10 +8,20 @@ public class PlayerStats : MonoBehaviour
 
     [Header("HealthPoint")]
     [SerializeField] private int hp;
-    public int HP
+    public int HP => hp;
+    public void TakeDamage(int amount)
     {
-        get => hp;
-        set => hp = Mathf.Max(0, value);
+        hp = Mathf.Max(0, hp - amount);
+
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Player died!");
+        Destroy(gameObject);
     }
 
     [Header("Movement")]

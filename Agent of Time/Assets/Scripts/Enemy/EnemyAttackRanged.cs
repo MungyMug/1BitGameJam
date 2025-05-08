@@ -18,7 +18,10 @@ public class EnemyAttackRanged : MonoBehaviour
 
     void Update()
     {
-        RangeEnemyBehavior();
+        if(playerRb2d != null)
+        {
+            RangeEnemyBehavior();
+        }
     }
 
     void RangeEnemyBehavior()
@@ -36,7 +39,7 @@ public class EnemyAttackRanged : MonoBehaviour
             if (Time.time >= lastAttackTime + enemyStats.AttackCooldown)
             {
                 Debug.Log("Enemy fires a bullet!");
-                playerStats.HP -= enemyStats.AttackPower;
+                playerStats.TakeDamage(enemyStats.AttackPower);
                 Debug.Log(playerStats.HP);
 
                 lastAttackTime = Time.time;
