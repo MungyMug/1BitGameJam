@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7052732858103080338}
   - component: {fileID: 6426185031010114444}
   - component: {fileID: 7057147112535553393}
+  - component: {fileID: 4301161345566552083}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -164,6 +165,19 @@ MonoBehaviour:
   enemyRb2d: {fileID: 6426185031010114444}
   moveSpeed: 3
   playerRb2d: {fileID: 0}
+--- !u!114 &4301161345566552083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208534097002228238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841a5577ce6cf964ea12c4389b674225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyRb2d: {fileID: 6426185031010114444}
 --- !u!1 &6536308816151120554
 GameObject:
   m_ObjectHideFlags: 0
