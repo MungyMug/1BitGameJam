@@ -10,6 +10,10 @@ public class EnemyAttackRanged : MonoBehaviour
     [Header("Target")]
     [SerializeField] PlayerStats playerStats;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
+
     private float lastAttackTime;
     private bool isWaitingAfterShoot;
 
@@ -39,6 +43,8 @@ public class EnemyAttackRanged : MonoBehaviour
             if (Time.time >= lastAttackTime + enemyStats.AttackCooldown)
             {
                 Debug.Log("Enemy fires a bullet!");
+
+                animator.SetTrigger("Attack");
                 playerStats.TakeDamage(enemyStats.AttackPower);
                 Debug.Log(playerStats.HP);
 

@@ -7,7 +7,18 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Rigidbody2D enemyRb2d;
 
     [Header("Target")]
-    [SerializeField] Rigidbody2D playerRb2d;
+    private Rigidbody2D playerRb2d;
+    private PlayerStats playerStats;
+
+    void Start()
+    {
+        if (playerRb2d == null)
+            playerRb2d = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+
+        if (playerStats == null)
+            playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+    }
+
 
     public void MoveTowardsPlayer()
     {

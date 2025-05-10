@@ -6,7 +6,7 @@ public class EnemyCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            
         }
     }
 }
