@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -7,19 +8,25 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float minSpawnDistance = 5f;
     [SerializeField] private float maxSpawnDistance = 10f;
-    [SerializeField] private int enemiesPerWave = 5;
+    [SerializeField] private float spawnInterval = 2f;  // time between spawns
+    [SerializeField] private int totalEnemiesToSpawn = 20;
+
+    private int enemiesSpawned = 0;
 
     void Start()
     {
-        SpawnEnemies();
+        StartCoroutine(SpawnEnemiesOverTime());
     }
 
-    public void SpawnEnemies()
+    IEnumerator SpawnEnemiesOverTime()
     {
-        for (int i = 0; i < enemiesPerWave; i++)
+        while (enemiesSpawned < totalEnemiesToSpawn)
         {
             Vector2 spawnPos = GetRandomSpawnPositionAroundPlayer();
             Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            enemiesSpawned++;
+
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
@@ -27,10 +34,7 @@ public class EnemySpawner : MonoBehaviour
     {
         float angle = Random.Range(0f, Mathf.PI * 2f);
         float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
-
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-        Vector2 spawnPos = (Vector2)player.position + direction * distance;
-
-        return spawnPos;
+        return (Vector2)player.position + direction * distance;
     }
 }
